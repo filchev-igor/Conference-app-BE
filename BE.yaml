@@ -1,0 +1,204 @@
+openapi: 3.0.0
+info:
+  title: Conference Management System API
+  version: 1.0.0
+  description: API for a conference management system with client, staff, and admin roles
+
+servers:
+  - url: https://api.example.com/v1
+    description: Main server
+
+tags:
+  - name: Client
+    description: Operations for clients
+  - name: Staff
+    description: Operations for staff members
+  - name: Admin
+    description: Operations for administrators
+
+paths:
+  /conferences:
+    get:
+      tags: [Client, Staff]
+      summary: Retrieve all conferences
+      description: Displays a list of scheduled conferences for clients and all conferences for staff members
+      responses:
+        '200':
+          description: List of conferences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conference'
+
+  /conferences/{id}:
+    get:
+      tags: [Client, Staff]
+      summary: View conference details
+      description: Get detailed information on a specific conference
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Conference ID
+      responses:
+        '200':
+          description: Conference details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conference'
+
+  /conferences/{id}/register:
+    post:
+      tags: [Client]
+      summary: Register for a conference
+      description: Register a client for the selected conference
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Conference ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '201':
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+
+  /admin/conferences:
+    post:
+      tags: [Admin]
+      summary: Create a new conference
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConferenceCreateRequest'
+      responses:
+        '201':
+          description: Conference successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conference'
+
+  /admin/conferences/{id}:
+    patch:
+      tags: [Admin]
+      summary: Edit a conference
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Conference ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConferenceUpdateRequest'
+      responses:
+        '200':
+          description: Conference successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conference'
+
+    delete:
+      tags: [Admin]
+      summary: Delete a conference
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Conference ID
+      responses:
+        '204':
+          description: Conference successfully deleted
+
+components:
+  schemas:
+    Conference:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+        location:
+          type: string
+
+    RegistrationRequest:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: User ID
+
+    Registration:
+      type: object
+      properties:
+        id:
+          type: integer
+        conferenceId:
+          type: integer
+        userId:
+          type: integer
+
+    ConferenceCreateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+        location:
+          type: string
+        speakers:
+          type: array
+          items:
+            type: string
+
+    ConferenceUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+        location:
+          type: string
+        speakers:
+          type: array
+          items:
+            type: string
