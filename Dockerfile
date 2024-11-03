@@ -1,14 +1,18 @@
 # Dockerfile
 FROM php:8.0-fpm
 
-# Install system dependencies
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     zip \
-    unzip
+    unzip \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_sqlite
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_sqlite gd
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
