@@ -8,6 +8,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/routes', function () {
+    $routes = collect(Route::getRoutes())->map(function ($route) {
+        return [
+            'method' => $route->methods(),
+            'uri' => $route->uri(),
+            'name' => $route->getName(),
+            'action' => $route->getActionName(),
+            'middleware' => $route->middleware(),
+        ];
+    });
+
+    return response()->json($routes);
+});
+
 Route::get('/conferences', [ConferenceController::class, 'index']);
 Route::post('/conferences', [ConferenceController::class, 'store']);
 Route::get('/conferences/{id}', [ConferenceController::class, 'show']);
