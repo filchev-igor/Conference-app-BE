@@ -11,7 +11,8 @@ class UserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Change this to true to allow requests to be authorized
+        return true;
     }
 
     /**
@@ -22,7 +23,9 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email', // Ensure email is unique
+            'password' => 'required|string|min:6', // Minimum password length
         ];
     }
 }

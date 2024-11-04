@@ -4,7 +4,7 @@ info:
   description: API for the conference management system
   version: "1.0.0"
 servers:
-  - url: https://localhost:8000
+  - url: https://localhost:8000/api
     description: Local development server
 
 paths:
@@ -147,12 +147,9 @@ components:
         id:
           type: integer
           readOnly: true
-        firstName:
+        name:
           type: string
-          description: User's first name
-        lastName:
-          type: string
-          description: User's last name
+          description: User's name
         email:
           type: string
           format: email
