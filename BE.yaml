@@ -8,6 +8,45 @@ servers:
     description: Local development server
 
 paths:
+  /login:
+    post:
+      summary: User login
+      description: Authenticates a user and returns an access token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                  description: The user's email address.
+                password:
+                  type: string
+                  format: password
+                  example: password
+                  description: The user's password.
+      responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: Bearer token to use in authenticated requests.
+                  token_type:
+                    type: string
+                    example: Bearer
+                    description: Type of token returned.
+        '401':
+          description: Invalid login credentials
+
   /conferences:
     get:
       summary: Get list of conferences
@@ -99,7 +138,7 @@ paths:
   /users/{id}:
     put:
       summary: Update user information
-      description: Update user details (first name, last name, email)
+      description: Update user details (name, email)
       parameters:
         - name: id
           in: path
