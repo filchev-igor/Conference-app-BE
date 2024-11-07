@@ -12,11 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        /*
-        $middleware->validateCsrfTokens(except: [
-            'https://localhost:5173/Conference-app-FE/',
-        ]);
-        */
+        //
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

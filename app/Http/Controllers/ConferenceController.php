@@ -16,6 +16,7 @@ class ConferenceController extends Controller
     public function store(ConferenceRequest $request)
     {
         $conference = Conference::create($request->validated());
+
         return response()->json($conference, 201);
     }
 
@@ -30,6 +31,7 @@ class ConferenceController extends Controller
     {
         $conference = Conference::findOrFail($id);
         $conference->update($request->all());
+
         return response()->json($conference);
     }
 
@@ -37,6 +39,7 @@ class ConferenceController extends Controller
     {
         $conference = Conference::findOrFail($id);
         $conference->delete();
+
         return response()->json(null, 204);
     }
 }

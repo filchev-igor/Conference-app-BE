@@ -25,9 +25,22 @@ class ConferenceRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-            'location' => 'required|string|max:255',
+            'time' => 'required|string|regex:/^\d{2}:\d{2} - \d{2}:\d{2}$/',
+            'location.venue' => 'required|string|max:255',
+            'location.hall' => 'nullable|string|max:255',
+            'location.address' => 'required|string|max:255',
+            'speakers' => 'required|array|min:1',
+            'speakers.*.name' => 'required|string|max:255',
+            'speakers.*.role' => 'required|string|max:255',
+            'speakers.*.company' => 'nullable|string|max:255',
+            'agendas' => 'required|array|min:1',
+            'agendas.*.id' => 'required|integer',
+            'agendas.*.title' => 'required|string|max:255',
+            'agendas.*.description' => 'required|string',
+            'agendas.*.start_time' => 'required|date_format:H:i',
+            'agendas.*.end_time' => 'required|date_format:H:i',
+            'registration_info' => 'required|string|max:500',
+            'registration_action' => 'required|string|max:255',
         ];
     }
-
 }

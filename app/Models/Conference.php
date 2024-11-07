@@ -15,5 +15,14 @@ class Conference extends Model
         'date',
         'time',
         'location',
+        'speakers',
+        'agendas',
+        'registration_info',
+        'registration_action',
+    ];
+
+    protected $casts = [
+        'speakers' => 'array',  // Cast speakers to array
+        'agendas' => 'array',   // Cast agendas to array
     ];
 }
