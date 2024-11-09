@@ -17,13 +17,9 @@ return new class extends Migration
             $table->text('description');
             $table->date('date');
             $table->string('time'); // Storing time as a string to allow a range like "09:00 - 17:00"
-            $table->string('venue')->nullable(); // Adding venue as a separate field
-            $table->string('hall')->nullable();  // Adding hall as a separate field
-            $table->string('address')->nullable(); // Adding address as a separate field
+            $table->json('location')->nullable(); // To store location data as JSON
             $table->json('speakers')->nullable(); // Speakers stored as JSON array
             $table->json('agendas')->nullable();  // Agendas stored as JSON array
-            $table->text('registration_info')->nullable(); // Registration information
-            $table->string('registration_action')->nullable(); // Registration call to action
             $table->timestamps();
         });
     }

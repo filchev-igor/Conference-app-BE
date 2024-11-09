@@ -26,6 +26,7 @@ class ConferenceRequest extends FormRequest
             'description' => 'required|string',
             'date' => 'required|date',
             'time' => 'required|string|regex:/^\d{2}:\d{2} - \d{2}:\d{2}$/',
+            'location' => 'required|array',  // Validate location as array
             'location.venue' => 'required|string|max:255',
             'location.hall' => 'nullable|string|max:255',
             'location.address' => 'required|string|max:255',
@@ -34,13 +35,8 @@ class ConferenceRequest extends FormRequest
             'speakers.*.role' => 'required|string|max:255',
             'speakers.*.company' => 'nullable|string|max:255',
             'agendas' => 'required|array|min:1',
-            'agendas.*.id' => 'required|integer',
-            'agendas.*.title' => 'required|string|max:255',
-            'agendas.*.description' => 'required|string',
-            'agendas.*.start_time' => 'required|date_format:H:i',
-            'agendas.*.end_time' => 'required|date_format:H:i',
-            'registration_info' => 'required|string|max:500',
-            'registration_action' => 'required|string|max:255',
+            'agendas.*.time' => 'required|date_format:H:i',  // Changed `time` to match JSON
+            'agendas.*.event' => 'required|string|max:255',  // Changed `event` to match JSON
         ];
     }
 }

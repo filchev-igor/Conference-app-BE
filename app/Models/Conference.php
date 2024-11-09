@@ -17,11 +17,10 @@ class Conference extends Model
         'location',
         'speakers',
         'agendas',
-        'registration_info',
-        'registration_action',
     ];
 
     protected $casts = [
+        'location' => 'array',  // Cast location as array
         'speakers' => 'array',  // Cast speakers to array
         'agendas' => 'array',   // Cast agendas to array
     ];
