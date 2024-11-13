@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('conferences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->json('participants_ids')->nullable();  // Agendas stored as JSON array
             $table->text('description');
             $table->date('date');
             $table->string('time'); // Storing time as a string to allow a range like "09:00 - 17:00"
             $table->json('location')->nullable(); // To store location data as JSON
             $table->json('speakers')->nullable(); // Speakers stored as JSON array
             $table->json('agendas')->nullable();  // Agendas stored as JSON array
+
             $table->timestamps();
         });
     }

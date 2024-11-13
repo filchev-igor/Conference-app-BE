@@ -11,7 +11,7 @@ use App\Models\User;
     'name' => 'Test User',
     'email' => 'user@example.com',
     'password' => bcrypt('password'), // Hash the password
-    'role' => 'user', // or another role as required, like 'admin'
+    'role' => 'admin', // or another role as required, like 'admin'
 ]);
 
 exit

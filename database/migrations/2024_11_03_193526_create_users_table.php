@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('role')->value('user');
+            $table->string('role')->default('user');
             $table->string('password');
+            $table->json('conferences_ids')->nullable();  // Agendas stored as JSON array
+            $table->string('backgroundClassName')->default('lined-paper');
             $table->timestamps();
         });
     }

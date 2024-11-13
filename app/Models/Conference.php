@@ -17,11 +17,13 @@ class Conference extends Model
         'location',
         'speakers',
         'agendas',
+        'participants_ids'
     ];
 
     protected $casts = [
         'location' => 'array',  // Cast location as array
         'speakers' => 'array',  // Cast speakers to array
         'agendas' => 'array',   // Cast agendas to array
+        'participants_ids' => 'array',
     ];
 }

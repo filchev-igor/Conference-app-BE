@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens; // Ensure HasApiTokens is imported
+use Laravel\Sanctum\HasApiTokens;
+
+// Ensure HasApiTokens is imported
 
 class User extends Authenticatable
 {
@@ -15,7 +17,12 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'id'
+        'conferences_ids',
+        'backgroundClassName',
+    ];
+
+    protected $casts = [
+        'conferences_ids' => 'array',
     ];
 
     protected $hidden = [
