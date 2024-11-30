@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 // Define the login route for API authentication
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/users', [UserController::class, 'store']);
 
 // Group for protected routes using Sanctum's token-based authentication
 Route::middleware('auth:sanctum')->group(function () {
@@ -19,7 +20,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/users/{id}', [UserController::class, 'show']);
-    Route::post('/users', [UserController::class, 'store']);
     Route::patch('/users/{id}', [UserController::class, 'partialUpdate']);
     Route::put('/users/{id}', [UserController::class, 'update']);
 });
